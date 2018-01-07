@@ -1,0 +1,5 @@
+.idea
+*.pyc
+
+/celerybeat-schedule
+/db.sqlite3
