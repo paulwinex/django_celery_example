@@ -79,36 +79,45 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
-CELERY_DEFAULT_QUEUE = 'normal'
+CELERY_DEFAULT_QUEUE = 'default'
+# CELERY_CONCURRENCY = 2
+# CELERY_MAX_TASKS_PER_CHILD = 4
+# CELERY_PREFETCH_MULTIPLIER = 1
 
 from celery.schedules import crontab
-__CELERY_BEAT_SCHEDULE = {
+CELERY_BEAT_SCHEDULE = {
     # http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html
     'add-every-1-min': {
-        'task': 'core.tasks.task_number3',
-        # 'schedule': crontab(minute='*/1', hour='*'),
-        # 'schedule': 60.0,
+        'task': 'core.tasks.task_number5',
         'schedule': crontab(),
+        # or
+        # 'schedule': crontab(minute='*/1', hour='*'),
+        # or
+        # 'schedule': 60.0,
         'args': []
     },
     'add-every-day': {
-        'task': 'core.tasks.task_number2',
+        'task': 'core.tasks.task_number5',
         'schedule': crontab(minute=0, hour=0),
         'args': []
     },
 }
 
 from kombu import Exchange, Queue
-
 CELERY_QUEUES = (
-    Queue('normal', Exchange('normal'), routing_key='normal'),
-    Queue('high', Exchange('high'), routing_key='high'),
+    Queue('high',
+          Exchange('high', ),
+          routing_key='high'
+          ),
+    Queue('default',
+          Exchange('default', ),
+          routing_key='default'
+          ),
+
+    Queue('low',
+          Exchange('low', ),
+          routing_key='low'
+          ),
+
 )
 
-CELERY_ROUTES = {
-    'core.tasks.task_number2':
-        {
-            'queue': 'high',
-            'routing_key': 'high'
-        },
-}
