@@ -26,11 +26,10 @@ def task_number3():
 
 @task(queue='low')
 def task_number4():
-    print('EXECUTE TASK 4 low')
+    print('EXECUTE TASK 4 scheduled')
     time.sleep(2)
 
-
-@task(queue='low')
+@task
 def task_number5():
-    print('EXECUTE TASK 5 scheduled')
+    print('EXECUTE TASK 5 no queue')
     time.sleep(2)

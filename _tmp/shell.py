@@ -5,6 +5,7 @@ tasks.task_number1.delay()
 tasks.task_number2.delay()
 tasks.task_number3.delay()
 tasks.task_number4.delay()
+tasks.task_number5.delay()
 
 # change default queue
 tasks.task_number1.apply_async(queue='default')
