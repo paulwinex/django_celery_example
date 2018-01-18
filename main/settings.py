@@ -88,7 +88,7 @@ from celery.schedules import crontab
 CELERY_BEAT_SCHEDULE = {
     # http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html
     'add-every-1-min': {
-        'task': 'core.tasks.task_number4',
+        'task': 'core.tasks.task_default',
         'schedule': crontab(),
         # or
         # 'schedule': crontab(minute='*/1', hour='*'),
@@ -97,7 +97,7 @@ CELERY_BEAT_SCHEDULE = {
         'args': []
     },
     'add-every-day': {
-        'task': 'core.tasks.task_number4',
+        'task': 'core.tasks.task_low',
         'schedule': crontab(minute=0, hour=0),
         'args': []
     },
